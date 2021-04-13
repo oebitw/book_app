@@ -88,7 +88,8 @@ function searchResultsHandler (req,res){
 
   let searchedBy= req.body.search_by;
 
-  let url = `https://www.googleapis.com/books/v1/volumes?q=${searchKey}+in${searchedBy}`;
+  let url = `https://www.googleapis.com/books/v1/volumes?q=+in${searchedBy}:${searchKey}`;
+
 
   superagent.get(url).then(booksData=>{
 
@@ -123,11 +124,11 @@ function Book(data){
 
   this.title=data.volumeInfo.title;
 
-  this.author=data.volumeInfo.authors? data.volumeInfo.authors: 'Unknown Book Authors';
+  this.author=(data.volumeInfo.authors)? data.volumeInfo.authors: 'Unknown Book Authors';
 
   this.description= data.volumeInfo.description? data.volumeInfo.description:'Description is Unavailable' ;
 
-  this.img=data.volumeInfo.imageLinks.thumbnail? data.volumeInfo.imageLinks.thumbnail: 'https://i.imgur.com/J5LVHEL.jpg';
+  this.img=(data.volumeInfo.imageLinks)? data.volumeInfo.imageLinks.thumbnail: 'https://i.imgur.com/J5LVHEL.jpg';
 
   this.url= data.accessInfo.webReaderLink ? data.accessInfo.webReaderLink: 'Unavailable';
 }

@@ -198,7 +198,7 @@ function updateHandler (req,res){
   const safeValues=[title,author, isbn, img , url , description, offShelf, id];
 
   client.query(SQL,safeValues).then(()=>{
-    res.redirect(`/`);
+    res.redirect(`/books/${id}`);
   });
 
 }
